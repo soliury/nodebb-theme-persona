@@ -87,6 +87,17 @@
 			<strong>{age}</strong>
 			<!-- ENDIF age -->
 		</div>
+		<!-- IF customFields -->
+                    <div class="custom-fields">
+                        <!-- IF customFields.vite_addr -->
+                        <div class="custom-field-item qrcode-popover" data-toggle="popover" data-trigger="click">
+                            <span class="field-label">Vite Address</span>
+                            <strong class="field-value">{customFields.vite_addr}</strong>
+                            <i class="fa fa-qrcode"></i>
+                        </div>
+                        <!-- ENDIF customFields.vite_addr -->
+                    </div>
+        <!-- ENDIF customFields -->
 	</div>
 
 

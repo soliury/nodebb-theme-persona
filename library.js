@@ -132,4 +132,27 @@ library.getLinkTags = function (data, callback) {
 	callback(null, data);
 };
 
+library.getSocialPosts = function (networks, callback) {
+    [
+        {
+            id: 'weibo',
+            name: 'Weibo',
+            class: 'fa-weibo',
+        },
+        {
+            id: 'wechat',
+            name: 'Wechat',
+            class: 'fa-weixin',
+        },
+        {
+            id: 'qq',
+            name: 'QQ',
+            class: 'fa-qq',
+        },
+    ].forEach(item => {
+    	networks.push(item)
+	})
+	callback(null, networks)
+}
+
 module.exports = library;

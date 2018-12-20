@@ -1,5 +1,5 @@
 {
-    "id": "nodebb-theme-persona",
+    "id": "nodebb-theme-persona-vite",
     "name": "Persona",
     "description": "The default theme for NodeBB. Uses a standard approach to forum design.",
     "url": "https://github.com/psychobunny/nodebb-theme-persona",

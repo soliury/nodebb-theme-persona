@@ -22,6 +22,7 @@
 		<span class="label label-danger">[[user:banned]]</span>
 		<!-- ENDIF posts.user.banned -->
 
+
 		<span class="visible-xs-inline-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
 			<a class="permalink" href="{config.relative_path}/post/{posts.pid}"><span class="timeago" title="{posts.timestampISO}"></span></a>
 
@@ -43,7 +44,7 @@
 			</span>
 		</span>
 		<span class="bookmarked"><i class="fa fa-bookmark-o"></i></span>
-
+		<!-- IMPORT partials/vite/reward.tpl -->
 	</small>
 </div>
 

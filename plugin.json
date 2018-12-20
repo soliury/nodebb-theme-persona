@@ -1,5 +1,5 @@
 {
-	"id": "nodebb-theme-persona",
+	"id": "nodebb-theme-persona-vite",
 	"library": "library.js",
 	"hooks": [
 		{ "hook": "filter:teasers.get", "method": "getTeasers" },
@@ -8,19 +8,25 @@
 		{ "hook": "static:app.load", "method": "init" },
 		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
 		{ "hook": "filter:topic.build", "method": "addUserToTopic" },
-		{ "hook": "filter:meta.getLinkTags", "method": "getLinkTags"}
+		{ "hook": "filter:meta.getLinkTags", "method": "getLinkTags"},
+		{ "hook": "filter:social.posts", "method": "getSocialPosts"}
 	],
 	"scripts": [
 		"lib/persona.js",
 		"lib/modules/nprogress.js",
 		"lib/modules/autohidingnavbar.min.js",
-		"lib/modules/quickreply.js"
+		"lib/modules/quickreply.js",
+		"lib/profile.js"
 	],
 	"modules": {
-		"pulling.js": "node_modules/pulling/build/pulling-drawer.js"
+		"pulling.js": "node_modules/pulling/build/pulling-drawer.js",
+		"qrcode.js": "node_modules/qrcode.es/build/qrcode.umd.js"
 	},
 	"acpScripts": [
 		"lib/admin.js"
 	],
+	"staticDirs": {
+		"static": "./static"
+	},
 	"languages": "languages"
 }
