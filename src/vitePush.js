@@ -17,7 +17,7 @@ function parseAmount (amount) {
     return t.dividedBy(1e+18).toFixed(2);
 }
 
-exports.sendRewardPush = function (user, tx, callback) {
+exports.sendRewardPush = function (user, tx) {
     var markupdata = Base64.decode(tx.data);
     try {
         markupdata = JSON.parse(JSON.parse('"' + markupdata + '"'))
@@ -39,11 +39,9 @@ exports.sendRewardPush = function (user, tx, callback) {
             },
         ], function (err) {
             console.log(err)
-            callback(err)
         });
     } catch (e) {
         console.log(e)
-        callback(e)
     }
 }
 
