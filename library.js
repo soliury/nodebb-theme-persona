@@ -170,7 +170,9 @@ library.ready = function () {
             if (ws.active) {
                 ws.send(JSON.stringify({
                     name: 'forum-reward-rule',
-                    toAddress: userList.map(function (item) {
+                    toAddress: userList.filter(function (item) {
+						return item && item.viteAddress
+                    }).map(function (item) {
                         return item.viteAddress
                     }),
                     dataInclude: ['forum-reward']

@@ -55,12 +55,16 @@ function getAllUser (callback) {
             return createObjectKey(uid)
         }), function (err, data) {
             if (!err) {
-                var userList = data.filter(function (item) {
-                    return item && item.vite_addr
-                }).map(function (item, index) {
+                var userList = data.map(function (item, index) {
+                    if (item && item.vite_addr) {
+                        return {
+                            uid: uids[index],
+                            viteAddress: item.vite_addr
+                        }
+                    }
                     return {
                         uid: uids[index],
-                        viteAddress: item.vite_addr
+                        viteAddress: null
                     }
                 })
                 callback(null, userList)
