@@ -1,6 +1,6 @@
 {
   "notificationType_new-vite-reward": "当你收到vite打赏时",
-  "new-vite-reward": "<strong>%1</strong> 打赏了您 %2 vite",
-  "new-vite-reward-subject": "%1 打赏了您 <strong>%2</strong> vite"
+  "new-vite-reward": "<strong>%1</strong> 打赏了您 <strong>%2</strong> vite",
+  "new-vite-reward-subject": "%1 打赏了您 %2 vite"
 
 }
