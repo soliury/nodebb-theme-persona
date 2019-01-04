@@ -1,5 +1,6 @@
 var Base64 = require('js-base64').Base64;
 var BigNumber = require('bignumber.js');
+const uuidv4 = require('uuid/v4');
 var notifications = require.main.require('./src/notifications');
 var db = require.main.require('./src/database');
 var async = require.main.require('async');
@@ -72,7 +73,7 @@ function getAllUser (callback) {
 
 exports.createWSClient = function () {
     // wsc.open('ws://192.168.31.147:8080/dev/websocket/wangmiantest');
-    wsc.open('ws://150.109.32.175:8080/websocket/wangmiantest');
+    wsc.open('ws://150.109.32.175:8080/websocket/' + uuidv4());
     return wsc;
 }
 
