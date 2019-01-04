@@ -39,9 +39,11 @@ exports.sendRewardPush = function (user, tx, callback) {
             },
         ], function (err) {
             console.log(err)
+            callback(err)
         });
     } catch (e) {
         console.log(e)
+        callback(e)
     }
 }
 
