@@ -9,7 +9,9 @@
 		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
 		{ "hook": "filter:topic.build", "method": "addUserToTopic" },
 		{ "hook": "filter:meta.getLinkTags", "method": "getLinkTags"},
-		{ "hook": "filter:social.posts", "method": "getSocialPosts"}
+		{ "hook": "filter:social.posts", "method": "getSocialPosts"},
+		{ "hook": "action:nodebb.ready", "method": "ready"},
+		{ "hook": "filter:user.notificationTypes", "method": "getNotificationTypes"}
 	],
 	"scripts": [
 		"lib/persona.js",

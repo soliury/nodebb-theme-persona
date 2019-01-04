@@ -2,9 +2,13 @@
 
 var striptags = require('striptags');
 var meta = require.main.require('./src/meta');
-var user = require.main.require('./src/user');
+var User = require.main.require('./src/user');
+var db = require.main.require('./src/database');
+var vitePush = require('./src/vitePush');
+var _ = require('lodash')
 
 var library = {};
+var allUsers = [];
 
 library.init = function(params, callback) {
 	var app = params.router;
@@ -102,7 +106,7 @@ function renderAdmin(req, res, next) {
 
 library.addUserToTopic = function(data, callback) {
 	if (data.req.user) {
-		user.getUserData(data.req.user.uid, function(err, userdata) {
+		User.getUserData(data.req.user.uid, function(err, userdata) {
 			if (err) {
 				return callback(err);
 			}
@@ -114,7 +118,7 @@ library.addUserToTopic = function(data, callback) {
 		data.templateData.loggedInUser =  {
 			uid: 0,
 			username: '[[global:guest]]',
-			picture: user.getDefaultAvatar(),
+			picture: User.getDefaultAvatar(),
 			'icon:text': '?',
 			'icon:bgColor': '#aaa',
 		};
@@ -153,6 +157,63 @@ library.getSocialPosts = function (networks, callback) {
     	networks.push(item)
 	})
 	callback(null, networks)
+}
+
+library.ready = function () {
+	var ws = vitePush.createWSClient();
+	var initMsg = function () {
+        vitePush.getAllUser(function (err, userList) {
+            if (err) {
+                return;
+            }
+            allUsers = userList;
+            if (ws.active) {
+                ws.send(JSON.stringify({
+                    name: 'forum-reward-rule',
+                    toAddress: userList.map(function (item) {
+                        return item.viteAddress
+                    }),
+                    dataInclude: ['forum-reward']
+                }))
+			}
+        })
+	}
+	setInterval(function () {
+		initMsg();
+    }, 1000 * 60);
+
+	if (ws.active) {
+		initMsg();
+	} else {
+		ws.onopen = function () {
+            initMsg();
+        };
+	}
+	ws.onmessage = function (data) {
+        var jsondata;
+        try {
+            jsondata = JSON.parse(data);
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+        if (jsondata.type === 'forum-reward-rule') {
+            var block = jsondata.data;
+            var toAddress = block.toAddress
+            if (toAddress) {
+                var cuser = _.find(allUsers, {viteAddress: toAddress});
+                cuser && vitePush.sendRewardPush(cuser, block)
+            }
+        }
+    }
+}
+
+library.getNotificationTypes = function (data, callback) {
+	callback(null, {
+        privilegedTypes: data.privilegedTypes.slice(),
+        types: data.types.concat(['notificationType_new-vite-reward'])
+    })
 }
 
 module.exports = library;
