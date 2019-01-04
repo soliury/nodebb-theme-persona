@@ -190,6 +190,7 @@ library.ready = function () {
         };
 	}
 	ws.onmessage = function (data) {
+		console.log(data);
         var jsondata;
         try {
             jsondata = JSON.parse(data);

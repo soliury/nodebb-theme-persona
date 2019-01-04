@@ -61,19 +61,19 @@ WebSocketClient.prototype.reconnect = function (e) {
 };
 
 WebSocketClient.prototype.onopen = function (e) {
-    // console.log("WebSocketClient: open", arguments);
+    console.log("WebSocketClient: open", e);
 };
 
 WebSocketClient.prototype.onmessage = function (data, flags, number) {
-    // console.log("WebSocketClient: message", arguments);
+    console.log("WebSocketClient: message", data);
 };
 
 WebSocketClient.prototype.onerror = function (e) {
-    // console.log("WebSocketClient: error", arguments);
+    console.log("WebSocketClient: error", e);
 };
 
 WebSocketClient.prototype.onclose = function (e) {
-    // console.log("WebSocketClient: closed", arguments);
+    console.log("WebSocketClient: closed", e);
 };
 
 module.exports = WebSocketClient;
