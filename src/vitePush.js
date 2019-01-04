@@ -29,7 +29,7 @@ exports.sendRewardPush = function (user, tx, callback) {
                     bodyShort: body,
                     nid: 'new-vite-reward:' + tx.hash,
                     path: '/user/' + markupdata.from,
-                    from: user.uid,
+                    from: markupdata.uid,
                     subject: body,
                 }, next);
             },

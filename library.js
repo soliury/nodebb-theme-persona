@@ -180,7 +180,7 @@ library.ready = function () {
 	}
 	setInterval(function () {
 		initMsg();
-    }, 1000 * 60);
+    }, 1000 * 30);
 
 	if (ws.active) {
 		initMsg();
