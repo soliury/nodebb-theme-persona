@@ -21,7 +21,7 @@ exports.sendRewardPush = function (user, tx, callback) {
     var markupdata = Base64.decode(tx.data);
     try {
         markupdata = JSON.parse(JSON.parse('"' + markupdata + '"'))
-        var body = '[[notifications:new-vite-reward, ' + markupdata.from + ', ' + parseAmount(tx.amount) + ']]';
+        var body = '[[notifications:new-vite-reward, ' + markupdata.uname + ', ' + parseAmount(tx.amount) + ']]';
         console.log(body);
         async.waterfall([
             function (next) {
@@ -31,7 +31,7 @@ exports.sendRewardPush = function (user, tx, callback) {
                     nid: 'new-vite-reward:' + tx.hash,
                     path: '/user/' + markupdata.from,
                     from: markupdata.uid,
-                    subject: body,
+                    subject: '[[notifications:new-vite-reward-subject, ' + markupdata.uname + ', ' + parseAmount(tx.amount) + ']]',
                 }, next);
             },
             function (notification, next) {

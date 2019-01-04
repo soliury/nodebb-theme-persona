@@ -1,4 +1,5 @@
 {
   "new-vite-reward": "<strong>%1</strong> reward you %2 vite",
-  "notificationType_new-vite-reward": "When you receive vite reward"
+  "notificationType_new-vite-reward": "When you receive vite reward",
+  "new-vite-reward-subject": "%1 reward you <strong>%2</strong> vite"
 }
