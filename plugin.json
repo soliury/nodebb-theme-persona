@@ -11,7 +11,8 @@
 		{ "hook": "filter:meta.getLinkTags", "method": "getLinkTags"},
 		{ "hook": "filter:social.posts", "method": "getSocialPosts"},
 		{ "hook": "action:nodebb.ready", "method": "ready"},
-		{ "hook": "filter:user.notificationTypes", "method": "getNotificationTypes"}
+		{ "hook": "filter:user.notificationTypes", "method": "getNotificationTypes"},
+		{ "hook": "filter:topic.create", "method": "createTopicFilter"}
 	],
 	"scripts": [
 		"lib/persona.js",

@@ -1,11 +1,13 @@
 'use strict';
 
 var striptags = require('striptags');
+var mediumToMarkdown = require('./src/medium');
 var meta = require.main.require('./src/meta');
 var User = require.main.require('./src/user');
 var db = require.main.require('./src/database');
 var vitePush = require('./src/vitePush');
 var _ = require('lodash')
+
 
 var library = {};
 var allUsers = [];
@@ -217,6 +219,26 @@ library.getNotificationTypes = function (data, callback) {
         privilegedTypes: data.privilegedTypes.slice(),
         types: data.types.concat(['notificationType_new-vite-reward'])
     })
+}
+
+library.createTopicFilter = function (topicData, callback) {
+	var topic = topicData.topic;
+	var data = topicData.data;
+	var content = data.content.trim();
+	if (/^https:\/\/medium\.com\/[\w \.-]*\/[^\s]*$/.test(content)) {
+        mediumToMarkdown(content)
+          .then(function (ob) {
+              data.content = ob.content;
+              topic.title = ob.title;
+              callback(null, Object.assign({}, topicData, {
+              	data,
+				topic
+			  }));
+          })
+		  .catch(function (err) {
+			  callback(err);
+          })
+	}
 }
 
 module.exports = library;
