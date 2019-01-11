@@ -238,6 +238,8 @@ library.createTopicFilter = function (topicData, callback) {
 		  .catch(function (err) {
 			  callback(err);
           })
+	} else {
+		callback(null, topicData)
 	}
 }
 
