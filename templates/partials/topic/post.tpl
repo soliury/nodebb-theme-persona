@@ -46,6 +46,7 @@
 		<span class="bookmarked"><i class="fa fa-bookmark-o"></i></span>
 		<!-- IMPORT partials/vite/reward.tpl -->
 	</small>
+	<!-- IMPORT partials/awards_topic.tpl -->
 </div>
 
 <br />

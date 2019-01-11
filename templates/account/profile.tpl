@@ -98,6 +98,8 @@
                         <!-- ENDIF customFields.vite_addr -->
                     </div>
         <!-- ENDIF customFields -->
+
+        <!-- IMPORT partials/awards_profile_flex.tpl -->
 	</div>
 
 
