@@ -236,7 +236,7 @@ library.createTopicFilter = function (topicData, callback) {
 			  }));
           })
 		  .catch(function (err) {
-			  callback(err);
+			  callback(null, topicData);
           })
 	} else {
 		callback(null, topicData)
