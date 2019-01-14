@@ -1,6 +1,6 @@
 {
   "name": "nodebb-theme-persona-vite",
-  "version": "9.1.20",
+  "version": "9.1.21",
   "nbbpm": {
     "compatibility": "^1.11.0"
   },
