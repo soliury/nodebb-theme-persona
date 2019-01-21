@@ -19,6 +19,7 @@
 		"lib/modules/nprogress.js",
 		"lib/modules/autohidingnavbar.min.js",
 		"lib/modules/quickreply.js",
+		"lib/modules/base64.js",
 		"lib/profile.js"
 	],
 	"modules": {
