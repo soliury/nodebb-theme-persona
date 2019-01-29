@@ -2,5 +2,6 @@
   "edit-menu-link": "Bind VITE Address",
   "custom-field-top-menu-link": "Bind VITE Address",
   "bind-vite-success": "Have Successfully Binding VITE Address!",
-  "vite-address-validate-error": "The Vite Address you submit is in a wrong format"
+  "vite-address-validate-error": "The Vite Address you submit is in a wrong format",
+  "vite-reward-success": "打赏成功, 交易已发送"
 }

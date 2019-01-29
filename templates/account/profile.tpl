@@ -97,6 +97,7 @@
                         </div>
                         <!-- ENDIF customFields.vite_addr -->
                     </div>
+                    <!-- IMPORT partials/vite/reward-modal.tpl -->
         <!-- ENDIF customFields -->
 
         <!-- IMPORT partials/awards_profile_flex.tpl -->
