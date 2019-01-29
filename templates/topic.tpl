@@ -103,3 +103,4 @@
 	<!-- IMPORT partials/paginator.tpl -->
 </noscript>
 <!-- ENDIF !config.usePagination -->
+<!-- IMPORT partials/vite/reward-modal.tpl -->

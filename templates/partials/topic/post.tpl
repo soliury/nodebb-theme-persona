@@ -48,7 +48,6 @@
 	</small>
 	<!-- IMPORT partials/awards_topic.tpl -->
 </div>
-
 <br />
 
 <div class="content" component="post/content" itemprop="text">

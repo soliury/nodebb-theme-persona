@@ -90,7 +90,7 @@
 		<!-- IF customFields -->
                     <div class="custom-fields">
                         <!-- IF customFields.vite_addr -->
-                        <div class="custom-field-item qrcode-popover" data-toggle="popover" data-trigger="click">
+                        <div class="custom-field-item qrcode-popover" data-address="{customFields.vite_addr}" data-toggle="popover" data-trigger="click">
                             <span class="field-label">Vite Address</span>
                             <strong class="field-value">{customFields.vite_addr}</strong>
                             <i class="fa fa-qrcode"></i>

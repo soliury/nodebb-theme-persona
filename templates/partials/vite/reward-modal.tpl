@@ -7,12 +7,13 @@
         </div>
       </div>
       <div class="modal-body">
+        <div class="reward-address">Address: <strong class="address"></strong></div>
         <div class="reward-range-wrapper">
             <input
                         class="vite-reward-modal-range"
                         type="range"
                         min="1"
-                        max="100"
+                        max="10"
                         step="1"
                         value="1"
                     >
