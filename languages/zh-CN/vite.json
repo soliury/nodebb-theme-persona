@@ -5,5 +5,7 @@
   "vite-address-validate-error": "您绑定的VITE地址格式不正确",
   "vite-reward-success": "打赏成功, 交易已发送",
   "vite-reward": "打赏",
-  "vite-reward-modal-close": "关闭"
+  "reward-name": "用户名",
+  "reward-address": "地址",
+  "reward-amount": "打赏数额"
 }

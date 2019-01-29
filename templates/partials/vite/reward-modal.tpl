@@ -3,11 +3,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title">
-            Reward: <strong>1</strong> VITE
+            [[vite:reward-amount]]: <strong>1</strong> VITE
         </div>
       </div>
       <div class="modal-body">
-        <div class="reward-address">Address: <strong class="address"></strong></div>
+        <div class="reward-username">[[vite:reward-name]]: <strong class="username"></strong></div>
+        <div class="reward-address">[[vite:reward-address]]: <strong class="address"></strong></div>
         <div class="reward-range-wrapper">
             <input
                         class="vite-reward-modal-range"
