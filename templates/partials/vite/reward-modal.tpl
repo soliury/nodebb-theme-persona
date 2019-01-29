@@ -1,25 +1,25 @@
-<div class="modal fade vite-reward-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade vite-reward-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-title">
+            Reward: <strong>1</strong> VITE
+        </div>
       </div>
       <div class="modal-body">
-        <input
-            type="range"
-            min="10"                    // default 0
-            max="1000"                  // default 100
-            step="10"                   // default 1
-            value="300"                 // default min + (max-min)/2
-            data-orientation="vertical" // default horizontal
-        >
+        <div class="reward-range-wrapper">
+            <input
+                        class="vite-reward-modal-range"
+                        type="range"
+                        min="1"
+                        max="100"
+                        step="1"
+                        value="1"
+                    >
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary submit btn-lg btn-block">[[vite:vite-reward]]</button>
       </div>
     </div>
   </div>

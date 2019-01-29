@@ -3,5 +3,7 @@
   "custom-field-top-menu-link": "绑定VITE地址",
   "bind-vite-success": "成功绑定VITE地址",
   "vite-address-validate-error": "您绑定的VITE地址格式不正确",
-  "vite-reward-success": "打赏成功, 交易已发送"
+  "vite-reward-success": "打赏成功, 交易已发送",
+  "vite-reward": "打赏",
+  "vite-reward-modal-close": "关闭"
 }
