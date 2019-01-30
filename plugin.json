@@ -12,7 +12,8 @@
 		{ "hook": "filter:social.posts", "method": "getSocialPosts"},
 		{ "hook": "action:nodebb.ready", "method": "ready"},
 		{ "hook": "filter:user.notificationTypes", "method": "getNotificationTypes"},
-		{ "hook": "filter:topic.create", "method": "createTopicFilter"}
+		{ "hook": "filter:topic.create", "method": "createTopicFilter"},
+		{ "hook": "filter:topic.build", "method": "addUserToTopic" }
 	],
 	"scripts": [
 		"lib/modules/promise.js",
