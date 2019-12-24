@@ -32,6 +32,12 @@
 						</div>
 					</div>
 				</div>
+				{{{each loginFormEntry}}}
+				<div class="form-group loginFormEntry">
+					<label for="login-{loginFormEntry.styleName}" class="col-lg-4 control-label">{loginFormEntry.label}</label>
+					<div id="login-{loginFormEntry.styleName}" class="col-lg-8">{{loginFormEntry.html}}</div>
+				</div>
+				{{{end}}}
 				<input type="hidden" name="_csrf" value="{config.csrf_token}" />
 				<input type="hidden" name="noscript" id="noscript" value="true" />
 				<div class="form-group">
@@ -40,7 +46,9 @@
 						<!-- IF allowRegistration -->
 						<span>[[login:dont_have_account]] <a href="{config.relative_path}/register">[[register:register]]</a></span>
 						<!-- ENDIF allowRegistration -->
+						<!-- IF allowPasswordReset -->
 						&nbsp; <a id="reset-link" href="{config.relative_path}/reset">[[login:forgot_password]]</a>
+						<!-- ENDIF allowPasswordReset -->
 					</div>
 				</div>
 			</form>
@@ -54,9 +62,9 @@
 		<div class="alt-login-block">
 			<h4>[[login:alternative_logins]]</h4>
 			<ul class="alt-logins">
-				<!-- BEGIN authentication -->
+				{{{each authentication}}}
 				<li class="{authentication.name}"><a rel="nofollow noopener noreferrer" target="_top" href="{config.relative_path}{authentication.url}"><i class="fa {authentication.icon} fa-3x"></i></a></li>
-				<!-- END authentication -->
+				{{{end}}}
 			</ul>
 		</div>
 	</div>

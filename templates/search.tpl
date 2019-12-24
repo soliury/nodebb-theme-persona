@@ -44,9 +44,9 @@
 								<div class="col-md-6">
 									<label>[[search:in-categories]]</label>
 									<select multiple class="form-control" id="posted-in-categories" size="{categoriesCount}">
-										<!-- BEGIN categories -->
+										{{{each categories}}}
 										<option value="{categories.value}">{categories.text}</option>
-										<!-- END categories -->
+										{{{end}}}
 									</select>
 									<input type="checkbox" id="search-children"> [[search:search-child-categories]]
 								</div>
@@ -163,7 +163,7 @@
 	</div>
 
 	<div class="row">
-		<div id="results" class="col-md-12" data-search-query="{search_query}">
+		<div id="results" class="search-results col-md-12" data-search-query="{search_query}">
 			<!-- IF matchCount -->
 			<div class="alert alert-info">[[search:results_matching, {matchCount}, {search_query}, {time}]] </div>
 			<!-- ELSE -->
@@ -172,13 +172,12 @@
 			<!-- ENDIF search_query -->
 			<!-- ENDIF matchCount -->
 
-			<!-- BEGIN posts -->
+			{{{each posts}}}
 			<div class="topic-row panel panel-default clearfix">
 				<div class="panel-body">
-
-					<a href="{config.relative_path}/post/{posts.pid}" class="search-result-text">
-						<h4>{posts.topic.title}</h4>
-					</a>
+					<a href="{config.relative_path}/user/{posts.user.userslug}">{buildAvatar(posts.user, "sm", true)}</a>
+					<span class="search-result-text search-result-title"><a href="{config.relative_path}/post/{posts.pid}">{posts.topic.title}</a></span>
+					<br/>
 					<!-- IF showAsPosts -->
 					<div class="search-result-text">
 						{posts.content}
@@ -186,21 +185,13 @@
 					</div>
 					<!-- ENDIF showAsPosts -->
 
-					<small>
-						<span class="pull-right post-preview-footer">
-							<a href="{config.relative_path}/user/{posts.user.userslug}">
-								<!-- IF posts.user.picture -->
-								<img class="user-img" title="{posts.user.username}" src="{posts.user.picture}"/>
-								<!-- ELSE -->
-								<div class="user-icon user-img" title="{posts.user.username}" style="background-color: {posts.user.icon:bgColor};">{posts.user.icon:text}</div>
-								<!-- ENDIF posts.user.picture -->
-							</a>
-							<a href="{config.relative_path}/category/{posts.category.slug}">[[global:posted_in, {posts.category.name}]] <i class="fa {posts.category.icon}"></i> <span class="timeago" title="{posts.timestampISO}"></span></a>
-						</span>
+					<small class="post-info pull-right">
+						<a href="{config.relative_path}/category/{posts.category.slug}"><span class="fa-stack" style="{function.generateCategoryBackground, posts.category}"><i style="color:{posts.category.color};" class="fa {posts.category.icon} fa-stack-1x"></i></span> {posts.category.name}</a> &bull;
+						<span class="timeago" title="{posts.timestampISO}"></span>
 					</small>
 				</div>
 			</div>
-			<!-- END posts -->
+			{{{end}}}
 
 			<!-- IF users.length -->
 			<ul id="users-container" class="users-container">

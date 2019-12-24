@@ -67,11 +67,7 @@
 
 					<li id="user_label" class="dropdown">
 						<label for="user-control-list-check" class="dropdown-toggle" data-toggle="dropdown" id="user_dropdown" title="[[global:header.profile]]" role="button">
-							<!-- IF user.picture -->
-							<img component="header/userpicture" src="{user.picture}" alt="{user.username}"/>
-							<!-- ELSE -->
-							<span component="header/usericon" class="user-icon" style="background-color: {user.icon:bgColor}; display: block;">{user.icon:text}</span>
-							<!-- ENDIF user.picture -->
+							{buildAvatar(user, "md", true)}
 							<span id="user-header-name" class="visible-xs-inline">{user.username}</span>
 						</label>
 						<input type="checkbox" class="hidden" id="user-control-list-check" aria-hidden="true">
@@ -222,7 +218,7 @@
 				</ul>
 
 				<ul id="main-nav" class="nav navbar-nav">
-					<!-- BEGIN navigation -->
+					{{{each navigation}}}
 					<!-- IF function.displayMenuItem, @index -->
 					<li class="{navigation.class}">
 						<a class="navigation-link" href="{navigation.route}" title="{navigation.title}" <!-- IF navigation.id -->id="{navigation.id}"<!-- ENDIF navigation.id --><!-- IF navigation.properties.targetBlank --> target="_blank"<!-- ENDIF navigation.properties.targetBlank -->>
@@ -236,7 +232,7 @@
 						</a>
 					</li>
 					<!-- ENDIF function.displayMenuItem -->
-					<!-- END navigation -->
+					{{{end}}}
 				</ul>
 
 				<!-- ELSE -->

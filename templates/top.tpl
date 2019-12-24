@@ -1,14 +1,14 @@
 <!-- IMPORT partials/breadcrumbs.tpl -->
-<div widget-area="header">
-	<!-- BEGIN widgets.header -->
+<div data-widget-area="header">
+	{{{each widgets.header}}}
 	{{widgets.header.html}}
-	<!-- END widgets.header -->
+	{{{end}}}
 </div>
 <div class="top">
 	<div class="btn-toolbar">
 		<div class="pull-left">
 			<!-- IF loggedIn -->
-			<button component="category/post" id="new_topic" class="btn btn-primary">[[category:new_topic_button]]</button>
+			<!-- IMPORT partials/buttons/newTopic.tpl -->
 			<!-- ELSE -->
 			<a component="category/post/guest" href="{config.relative_path}/login" class="btn btn-primary">[[category:guest-login-post]]</a>
 			<!-- ENDIF loggedIn -->
@@ -21,11 +21,11 @@
 			{selectedFilter.name} <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
-				<!-- BEGIN filters -->
+				{{{each filters}}}
 				<li role="presentation" class="category">
 					<a role="menu-item" href="{config.relative_path}/{filters.url}"><i class="fa fa-fw <!-- IF filters.selected -->fa-check<!-- ENDIF filters.selected -->"></i>{filters.name}</a>
 				</li>
-				<!-- END filters -->
+				{{{end}}}
 			</ul>
 		</div>
 
@@ -34,11 +34,11 @@
 			{selectedTerm.name} <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
-				<!-- BEGIN terms -->
+				{{{each terms}}}
 				<li role="presentation" class="category">
 					<a role="menu-item" href="{config.relative_path}/{terms.url}"><i class="fa fa-fw <!-- IF terms.selected -->fa-check<!-- ENDIF terms.selected -->"></i>{terms.name}</a>
 				</li>
-				<!-- END terms -->
+				{{{end}}}
 			</ul>
 		</div>
 	</div>

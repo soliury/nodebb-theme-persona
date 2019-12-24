@@ -16,7 +16,7 @@
 		padding-bottom: 0px;
 	}
 
-	[widget-area="header"], [widget-area="footer"] {
+	[data-widget-area="header"], [data-widget-area="footer"] {
 		display: none;
 	}
 }
@@ -308,6 +308,7 @@
 					width: 28px;
 					height: 28px;
 					line-height: 26px;
+					vertical-align: bottom;
 				}
 
 				img {
@@ -514,6 +515,24 @@
 				}
 			}
 		}
+
+		li.system-message {
+			list-style-type: none;
+			text-align: center;
+			color: @gray-light;
+			font-size: 1.25rem;
+			padding: 1rem 0;
+
+			&::before, &::after {
+				display: inline-block;
+				width: 10%;
+				content: '';
+				border-top: 1px solid @gray-lighter;
+				position: relative;
+				top: -0.3rem;
+				margin: 0 2rem;
+			}
+		}
 	}
 
 	.user-typing {
@@ -561,7 +580,6 @@
 
 [component="chat/manage-modal"] {
 	.list-group-item .avatar {
-		border-radius: 0;
 		margin-right: 1em;
 	}
 

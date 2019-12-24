@@ -70,14 +70,10 @@
 					<!-- IF !group.pending.length -->
 					<div class="alert alert-info">[[groups:pending.none]]</div>
 					<!-- ENDIF !group.pending.length -->
-					<!-- BEGIN group.pending -->
+					{{{each group.pending}}}
 					<tr data-uid="{group.pending.uid}">
 						<td>
-							<!-- IF group.pending.picture -->
-							<a href="{config.relative_path}/user/{group.pending.userslug}"><img class="avatar avatar-sm avatar-rounded" src="{group.pending.picture}" /></a>
-							<!-- ELSE -->
-							<div class="avatar avatar-sm avatar-rounded" style="background-color: {group.pending.icon:bgColor};">{group.pending.icon:text}</div>
-							<!-- ENDIF group.pending.picture -->
+							<a href="{config.relative_path}/user/{group.pending.userslug}">{buildAvatar(group.pending, "sm", true)}</a>
 						</td>
 						<td class="member-name">
 							<a href="{config.relative_path}/user/{group.pending.userslug}">{group.pending.username}</a>
@@ -94,7 +90,7 @@
 							</div>
 						</td>
 					</tr>
-					<!-- END group.pending -->
+					{{{end}}}
 				</table>
 			</div>
 		</div>
@@ -122,14 +118,10 @@
 					<!-- IF !group.invited.length -->
 					<div class="alert alert-info">[[groups:invited.none]]</div>
 					<!-- ENDIF !group.invited.length -->
-					<!-- BEGIN group.invited -->
+					{{{each group.invited}}}
 					<tr data-uid="{group.invited.uid}">
 						<td>
-							<!-- IF group.invited.picture -->
-							<a href="{config.relative_path}/user/{group.invited.userslug}"><img class="avatar avatar-sm avatar-rounded" src="{group.invited.picture}" /></a>
-							<!-- ELSE -->
-							<div class="avatar avatar-sm avatar-rounded" style="background-color: {group.invited.icon:bgColor};">{group.invited.icon:text}</div>
-							<!-- ENDIF group.invited.picture -->
+							<a href="{config.relative_path}/user/{group.invited.userslug}">{buildAvatar(group.invited, "sm", true)}</a>
 						</td>
 						<td class="member-name">
 							<a href="{config.relative_path}/user/{group.invited.userslug}">{group.invited.username}</a>
@@ -145,7 +137,7 @@
 							</div>
 						</td>
 					</tr>
-					<!-- END group.invited -->
+					{{{end}}}
 				</table>
 			</div>
 		</div>
@@ -222,6 +214,11 @@
 					</div>
 					<div class="checkbox">
 						<label>
+							<input name="disableLeave" type="checkbox"{{{if group.disableLeave}}} checked{{{end}}}> <strong>[[groups:details.disableLeave]]</strong>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
 							<input name="hidden" type="checkbox"<!-- IF group.hidden --> checked<!-- ENDIF group.hidden -->> <strong>[[groups:details.hidden]]</strong>
 							<p class="help-block">
 								[[groups:details.hidden_help]]
@@ -235,10 +232,10 @@
 			</div>
 		</div>
 		<!-- ENDIF group.isOwner -->
-		<div widget-area="left">
-			<!-- BEGIN widgets.left -->
+		<div data-widget-area="left">
+			{{{each widgets.left}}}
 			{{widgets.left.html}}
-			<!-- END widgets.left -->
+			{{{end}}}
 		</div>
 	</div>
 	<div class="col-lg-8 col-xs-12">
@@ -248,10 +245,10 @@
 			<!-- ENDIF !posts.length -->
 			<!-- IMPORT partials/posts_list.tpl -->
 		</div>
-		<div widget-area="right">
-			<!-- BEGIN widgets.right -->
+		<div data-widget-area="right">
+			{{{each widgets.right}}}
 			{{widgets.right.html}}
-			<!-- END widgets.right -->
+			{{{end}}}
 		</div>
 	</div>
 </div>

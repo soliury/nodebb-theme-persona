@@ -42,7 +42,7 @@
 					</td>
 				</tr>
 				<!-- ENDIF !flags.length -->
-				<!-- BEGIN flags -->
+				{{{each flags}}}
 				<tr data-flag-id="{../flagId}">
 					<td><span class="label label-{../labelClass}">[[flags:state-{../state}]]</span></td>
 					<td>
@@ -51,16 +51,12 @@
 						</a>
 					</td>
 					<td>
-						<!-- IF ../reporter.picture -->
-						<img class="avatar avatar-sm" src="{../reporter.picture}" />
-						<!-- ELSE -->
-						<div class="avatar avatar-sm" style="background-color: {../reporter.icon:bgColor};">{../reporter.icon:text}</div>
-						<!-- ENDIF ../reporter.picture -->
+						{buildAvatar(../reporter, "sm")}
 						{../reporter.username}
 					</td>
 					<td><span class="timeago" title="{../datetimeISO}"></span></td>
 				</tr>
-				<!-- END flags -->
+				{{{end}}}
 			</tbody>
 		</table>
 
