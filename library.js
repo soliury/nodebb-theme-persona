@@ -5,7 +5,7 @@ var mediumToMarkdown = require('./src/medium');
 var meta = require.main.require('./src/meta');
 var User = require.main.require('./src/user');
 var db = require.main.require('./src/database');
-var vitePush = require('./src/vitePush');
+// var vitePush = require('./src/vitePush');
 var _ = require('lodash')
 
 
@@ -162,56 +162,56 @@ library.getSocialPosts = function (networks, callback) {
 }
 
 library.ready = function () {
-	var ws = vitePush.createWSClient();
-	var initMsg = function () {
-        vitePush.getAllUser(function (err, userList) {
-            if (err) {
-                return;
-            }
-            allUsers = userList;
-            if (ws.active) {
-                ws.send(JSON.stringify({
-                    name: 'forum-reward-rule',
-                    toAddress: userList.filter(function (item) {
-						return item && item.viteAddress
-                    }).map(function (item) {
-                        return item.viteAddress
-                    }),
-                    dataInclude: ['forum-reward']
-                }))
-			}
-        })
-	}
-	setInterval(function () {
-		initMsg();
-    }, 1000 * 30);
+	// var ws = vitePush.createWSClient();
+	// var initMsg = function () {
+    //     vitePush.getAllUser(function (err, userList) {
+    //         if (err) {
+    //             return;
+    //         }
+    //         allUsers = userList;
+    //         if (ws.active) {
+    //             ws.send(JSON.stringify({
+    //                 name: 'forum-reward-rule',
+    //                 toAddress: userList.filter(function (item) {
+	// 					return item && item.viteAddress
+    //                 }).map(function (item) {
+    //                     return item.viteAddress
+    //                 }),
+    //                 dataInclude: ['forum-reward']
+    //             }))
+	// 		}
+    //     })
+	// }
+	// setInterval(function () {
+	// 	initMsg();
+    // }, 1000 * 30);
 
-	if (ws.active) {
-		initMsg();
-	} else {
-		ws.onopen = function () {
-            initMsg();
-        };
-	}
-	ws.onmessage = function (data) {
-		console.log(data);
-        var jsondata;
-        try {
-            jsondata = JSON.parse(data);
-        }
-        catch (err) {
-            console.log(err);
-        }
+	// if (ws.active) {
+	// 	initMsg();
+	// } else {
+	// 	ws.onopen = function () {
+    //         initMsg();
+    //     };
+	// }
+	// ws.onmessage = function (data) {
+	// 	console.log(data);
+    //     var jsondata;
+    //     try {
+    //         jsondata = JSON.parse(data);
+    //     }
+    //     catch (err) {
+    //         console.log(err);
+    //     }
 
-        if (jsondata.type === 'forum-reward-rule') {
-            var block = jsondata.data;
-            var toAddress = block.toAddress
-            if (toAddress) {
-                var cuser = _.find(allUsers, {viteAddress: toAddress});
-                cuser && vitePush.sendRewardPush(cuser, block)
-            }
-        }
-    }
+    //     if (jsondata.type === 'forum-reward-rule') {
+    //         var block = jsondata.data;
+    //         var toAddress = block.toAddress
+    //         if (toAddress) {
+    //             var cuser = _.find(allUsers, {viteAddress: toAddress});
+    //             cuser && vitePush.sendRewardPush(cuser, block)
+    //         }
+    //     }
+    // }
 }
 
 library.getNotificationTypes = function (data, callback) {
