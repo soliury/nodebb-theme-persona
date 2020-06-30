@@ -2,6 +2,8 @@
 
 	.topic-list {
 		margin-top: 10px;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 
 	> ul {
@@ -23,12 +25,6 @@
 				opacity: 0.30;
 			}
 
-			&.pinned {
-				[component="topic/pinned"] {
-					cursor: move;
-				}
-			}
-
 			.select {
 				position: relative;
 				.pointer;
@@ -39,28 +35,29 @@
 				}
 
 				.fa-check {
-					padding: 14px;
+					padding: 14.5px;	/* 14.5*2 + 15 + 2px border = 46px */
 					border-radius: 50%;
 					position: absolute;
 					font-size: 15px;
 					opacity: 0;
 					top: 0px;
 					left: 0px;
+					border: 1px solid transparent;
+					background: white;
+					width: 100%;
+					height: 100%;
+					padding: 14px;
 
 					&:before {
 						.pointer;
 					}
-
-					@media (max-width: @screen-sm-max) {
-						padding: 7px;
-					}
 				}
 
-				.user-img, .user-icon {
+				.avatar {
 					opacity: 1;
 				}
 
-				.fa-check, .user-img, .user-icon {
+				.fa-check, .avatar {
 					.transition(.2s ease-in-out all);
 				}
 
@@ -68,7 +65,7 @@
 			}
 
 			.avatar .select:hover {
-				.user-img, .user-icon {
+				.avatar {
 					opacity: 0;
 				}
 
@@ -80,7 +77,7 @@
 			}
 
 			&.selected {
-				.select .user-img, .select .user-icon {
+				.select .avatar {
 					opacity: 0;
 				}
 
@@ -168,6 +165,10 @@
 		font-size: 65%;
 		border-radius: 50%;
 	}
+
+	#category-dropdown-check:checked + .dropdown-menu {
+		display: block;
+	}
 }
 
 .category-dropdown-menu {
@@ -179,9 +180,8 @@
 	position: fixed;
 	bottom: 10%;
 	right: 2rem;
-	z-index: 1;
+	z-index: 3;
 	.topics-section {
-		text-align: center;
 		max-height: 500px;
 		overflow-y: auto;
 	}

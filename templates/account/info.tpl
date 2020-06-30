@@ -6,7 +6,7 @@
 		<div class="col-xs-12 col-md-12">
 			<h4>[[global:sessions]]</h4>
 			<ul class="list-group" component="user/sessions">
-				<!-- BEGIN sessions -->
+				{{{each sessions}}}
 				<li class="list-group-item" data-uuid="{../uuid}">
 					<div class="pull-right">
 						<!-- IF isSelfOrAdminOrGlobalModerator -->
@@ -23,7 +23,7 @@
 						<li><strong>[[global:ip_address]]</strong>: {../ip}</li>
 					</ul>
 				</li>
-				<!-- END sessions -->
+				{{{end}}}
 			</ul>
 		</div>
 	</div>
@@ -37,9 +37,9 @@
 				</div>
 				<div class="panel-body">
 					<ul>
-						<!-- BEGIN ips -->
+						{{{each ips}}}
 						<li>@value</li>
-						<!-- END ips -->
+						{{{end}}}
 					</ul>
 				</div>
 			</div>
@@ -50,12 +50,12 @@
 				</div>
 				<div class="panel-body">
 					<ul class="list-group">
-						<!-- BEGIN usernames -->
+						{{{each usernames}}}
 						<li class="list-group-item">
 							{../value}
 							<small class="pull-right"><span class="timeago" title="{../timestampISO}"></span></small>
 						</li>
-						<!-- END usernames -->
+						{{{end}}}
 					</ul>
 				</div>
 			</div>
@@ -66,12 +66,12 @@
 				</div>
 				<div class="panel-body">
 					<ul class="list-group">
-						<!-- BEGIN emails -->
+						{{{each emails}}}
 						<li class="list-group-item">
 							{../value}
 							<small class="pull-right"><span class="timeago" title="{../timestampISO}"></span></small>
 						</li>
-						<!-- END emails -->
+						{{{end}}}
 					</ul>
 				</div>
 			</div>
@@ -84,14 +84,14 @@
 				<div class="panel-body">
 					<!-- IF history.flags.length -->
 					<ul class="recent-flags">
-						<!-- BEGIN history.flags -->
+						{{{each history.flags}}}
 						<li>
 							<p>
 								<a class="title" href="{config.relative_path}/post/{../pid}">{../title}</a><br />
 								<span class="timestamp">Flagged <span class="timeago" title="{../timestampISO}"></span> ({../timestampReadable})</span>
 							</p>
 						</li>
-						<!-- END history.flags -->
+						{{{end}}}
 					</ul>
 					<!-- ELSE -->
 					<div class="alert alert-success">[[user:info.no-flags]]</div>
@@ -119,16 +119,13 @@
 				<div class="panel-body">
 					<!-- IF history.bans.length -->
 					<ul class="ban-history">
-						<!-- BEGIN history.bans -->
+						{{{each history.bans}}}
 						<li>
 							<p>
-								<a href="{config.relative_path}/user/{history.bans.user.userslug}">
-									<!-- IF history.bans.user.picture -->
-									<img title="{history.bans.user.username}" class="avatar avatar-sm avatar-rounded" src="{history.bans.user.picture}" />
-									<!-- ELSE -->
-									<span title="{history.bans.user.username}" class="avatar avatar-sm avatar-rounded user-icon" style="background-color: {history.bans.user.icon:bgColor};">{history.bans.user.icon:text}</span>
-									<!-- ENDIF history.bans.user.picture -->
-								</a>
+								<a href="{config.relative_path}/user/{history.bans.user.userslug}">{buildAvatar(history.bans.user, "sm", true)}</a>
+								<strong>
+									<a href="<!-- IF history.bans.user.userslug -->{config.relative_path}/user/{history.bans.user.userslug}<!-- ELSE -->#<!-- ENDIF history.bans.user.userslug -->" itemprop="author" data-username="{history.bans.user.username}" data-uid="{history.bans.user.uid}">{history.bans.user.username}</a>
+								</strong>
 								<span class="timestamp timeago" title="{../timestampISO}"></span> &mdash; {../timestampReadable}<br />
 								<!-- IF ../until -->
 								<span class="expiry">[[user:info.banned-until, {../untilReadable}]]</span><br />
@@ -138,7 +135,7 @@
 								<span class="reason"><strong>[[user:info.banned-reason-label]]</strong>: {../reason}</span>
 							</p>
 						</li>
-						<!-- END history.bans -->
+						{{{end}}}
 					</ul>
 					<!-- ELSE -->
 					<div class="alert alert-success">[[user:info.no-ban-history]]</div>
@@ -156,21 +153,12 @@
 					<button class="btn btn-sm pull-right btn-success" component="account/save-moderation-note">[[user:info.moderation-note.add]]</button>
 					<br/>
 					<div component="account/moderation-note/list">
-						<!-- BEGIN moderationNotes -->
+						{{{each moderationNotes}}}
 						<hr/>
 
 						<div class="clearfix">
-							<div class="icon pull-left">
-								<a href="<!-- IF moderationNotes.user.userslug -->{config.relative_path}/user/{moderationNotes.user.userslug}<!-- ELSE -->#<!-- ENDIF moderationNotes.user.userslug -->">
-									<!-- IF moderationNotes.user.picture -->
-									<img class="avatar avatar-sm" component="user/picture" data-uid="{moderationNotes.user.uid}" src="{moderationNotes.user.picture}" align="left" itemprop="image" />
-									<!-- ELSE -->
-									<div class="avatar avatar-sm" component="user/picture" data-uid="{moderationNotes.user.uid}" style="background-color: {moderationNotes.user.icon:bgColor};">{moderationNotes.user.icon:text}</div>
-									<!-- ENDIF moderationNotes.user.picture -->
-								</a>
-							</div>
-
 							<div class="pull-left">
+								<a href="<!-- IF moderationNotes.user.userslug -->{config.relative_path}/user/{moderationNotes.user.userslug}<!-- ELSE -->#<!-- ENDIF moderationNotes.user.userslug -->">{buildAvatar(moderationNotes.user, "sm", true)}</a>
 								<strong>
 									<a href="<!-- IF moderationNotes.user.userslug -->{config.relative_path}/user/{moderationNotes.user.userslug}<!-- ELSE -->#<!-- ENDIF moderationNotes.user.userslug -->" itemprop="author" data-username="{moderationNotes.user.username}" data-uid="{moderationNotes.user.uid}">{moderationNotes.user.username}</a>
 								</strong>
@@ -185,7 +173,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- END moderationNotes -->
+						{{{end}}}
 					</div>
 					<!-- IMPORT partials/paginator.tpl -->
 				</div>
