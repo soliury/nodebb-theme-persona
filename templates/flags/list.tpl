@@ -5,18 +5,6 @@
 		<!-- IMPORT partials/flags/filters.tpl -->
 	</div>
 	<div class="col-sm-8 col-md-9">
-		<div class="text-center">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div><canvas id="flags:daily" height="250"></canvas></div>
-					<p>
-
-					</p>
-				</div>
-				<div class="panel-footer"><small>[[flags:graph-label]]</small></div>
-			</div>
-		</div>
-
 		<!-- IF hasFilter -->
 		<div class="alert alert-warning">
 			<p class="pull-right">
@@ -25,13 +13,27 @@
 			[[flags:filter-active]]
 		</div>
 		<!-- ENDIF hasFilter -->
+
+		<div class="btn-group pull-right" component="flags/bulk-actions">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" autocomplete="off" aria-haspopup="true" aria-expanded="false" disabled="disabled">
+				<i class="fa fa-clone"></i> [[flags:bulk-actions]] <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href="#" data-action="bulk-assign">[[flags:assign-to-me]]</a></li>
+				<li><a href="#" data-action="bulk-mark-resolved">[[flags:bulk-resolve]]</a></li>
+			</ul>
+		</div>
+
 		<table class="table table-striped table-hover" component="flags/list">
 			<thead>
 				<tr>
-					<th>[[flags:state]]</th>
+					<th>
+						<input type="checkbox" data-action="toggle-all" autocomplete="off" />
+					</th>
 					<th></th>
-					<th><span class="hidden-xs">[[flags:reporter]] </span><i class="fa fa-user-plus"></i></th>
-					<th><span class="hidden-xs">[[flags:reported-at]] </span><i class="fa fa-clock-o"></i></th>
+					<th><span class="hidden-xs">[[flags:reports]] </span><i class="fa fa-user-plus"></i></th>
+					<th><span class="hidden-xs">[[flags:first-reported]] </span><i class="fa fa-clock-o"></i></th>
+					<th>[[flags:state]]</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,17 +48,19 @@
 				<!-- ENDIF !flags.length -->
 				{{{each flags}}}
 				<tr data-flag-id="{../flagId}">
-					<td><span class="label label-{../labelClass}">[[flags:state-{../state}]]</span></td>
+					<td>
+						<input type="checkbox" autocomplete="off" />
+					</td>
 					<td>
 						<a href="{config.relative_path}/flags/{../flagId}">
-							<strong>{../target_readable}</strong> &mdash; <span component="flags/list/description">{../description}</span>
+							<strong>{../target_readable}</strong>
 						</a>
 					</td>
 					<td>
-						{buildAvatar(../reporter, "sm")}
-						{../reporter.username}
+						{./heat}
 					</td>
 					<td><span class="timeago" title="{../datetimeISO}"></span></td>
+					<td><span class="label label-{../labelClass}">[[flags:state-{../state}]]</span></td>
 				</tr>
 				{{{end}}}
 			</tbody>

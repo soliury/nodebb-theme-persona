@@ -1,10 +1,7 @@
 <!-- IMPORT partials/breadcrumbs.tpl -->
 
 <div class="row">
-	<div class="col-sm-4 col-md-3">
-		<!-- IMPORT partials/flags/filters.tpl -->
-	</div>
-	<div class="col-sm-8 col-md-9">
+	<div class="col-sm-12">
 		<h2 class="h4">
 			{target_readable}
 			<small><span class="timeago" title="{datetimeISO}"></span></small>
@@ -48,24 +45,17 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<form role="form" id="attributes">
-					<div class="form-group row">
-						<div class="col-sm-6">
-							<h2 class="h4">[[flags:reporter]]</h2>
-							<div>
-								{buildAvatar(reporter, "sm", false, "media-object")}
-								<a href="{config.relative_path}/user/{reporter.userslug}">{reporter.username}</a>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<h2 class="h4">[[flags:reported-at]]</h2>
-							<p>
-								{datetimeISO}
-							</p>
-						</div>
-					</div>
 					<div class="form-group">
-						<h2 class="h4">[[flags:description]]</h2>
-						<blockquote>{description}</blockquote>
+						<h2 class="h4">[[flags:reports]]</h2>
+						<ul class="list-group" component="flag/reports">
+							{{{ each reports }}}
+							<li class="list-group-item">
+								<a href="{config.relative_path}/user/{reporter.userslug}">{buildAvatar(./reporter, "sm", false)}</a>
+								&ndash; <span class="timeago" title="{./timestampISO}"></span>
+								<blockquote><em>{./value}</em></blockquote>
+							</li>
+							{{{ end }}}
+						</ul>
 					</div>
 					<div class="form-group">
 						<h2 class="h4" for="state">[[flags:state]]</h2>
@@ -103,7 +93,7 @@
 					<div class="alert alert-success text-center">[[flags:no-notes]]</div>
 					<!-- ENDIF !notes.length -->
 					{{{each notes}}}
-					<div class="media">
+					<div class="media" data-datetime="{../datetime}" data-index="@index">
 						<div class="media-left">
 							<a href="{config.relative_path}/user/{../user.userslug}">{buildAvatar(notes.user, "md", false, "media-object")}</a>
 						</div>
@@ -113,6 +103,10 @@
 								<small><span class="timeago" title="{../datetimeISO}"></span></small>
 							</h4>
 							{../content}
+						</div>
+						<div class="media-right">
+							<a href="#" data-action="prepare-edit"><i class="fa fa-pencil"></i></a>
+							<a href="#" data-action="delete-note"><i class="fa fa-trash text-danger"></i></a>
 						</div>
 					</div>
 					{{{end}}}
@@ -133,10 +127,10 @@
 
 				{{{ if type_bool.post }}}
 				{{{ if !target.deleted}}}
-				<a class="btn btn-danger btn-block" href="#" data-action="delete-post">[[flags:delete-post]]</a>
+				<a class="btn btn-danger btn-block" href="#" data-action="delete-post"><i class="fa fa-trash"></i> [[flags:delete-post]]</a>
 				{{{ else }}}
-				<a class="btn btn-danger btn-block" href="#" data-action="purge-post">[[flags:purge-post]]</a>
-				<a class="btn btn-success btn-block" href="#" data-action="restore-post">[[flags:restore-post]]</a>
+				<a class="btn btn-danger btn-block" href="#" data-action="purge-post"><i class="fa fa-trash"></i> [[flags:purge-post]]</a>
+				<a class="btn btn-success btn-block" href="#" data-action="restore-post"><i class="fa fa-reply"></i><i class="fa fa-trash"></i> [[flags:restore-post]]</a>
 				{{{ end }}}
 				{{{ end }}}
 
@@ -160,18 +154,6 @@
 					</ul>
 				</div>
 				{{{ end }}}
-
-				<div class="btn-group btn-block">
-					<button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa-user"></i>
-						[[flags:reporter]]
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="{config.relative_path}/uid/{reporter.uid}">[[flags:view-profile]]</a></li>
-						<li><a href="#" data-chat="{reporter.uid}">[[flags:start-new-chat]]</a></li>
-					</ul>
-				</div>
 
 				<hr />
 
